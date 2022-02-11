@@ -60,10 +60,19 @@
             {{ even }}
           </li>
         </div>
-
       </ul>
       <p appBasicHighLight>Style me with basic directive!</p>
-      <p appBetterHighLight [defaultColor]="'yellow'" [highLightColor]="'red'">Style me with a better directive!</p>
+      <p appBetterHighLight [defaultColor]="'yellow'" [highLightColor]="'red'">
+        Style me with a better directive!
+      </p>
+
+      <!--=== NG SWITCH  ===-->
+      <div [ngSwitch]="value">
+        <p *ngSwitchCase="5">value is 5</p>
+        <p *ngSwitchCase="10">value is 10</p>
+        <p *ngSwitchCase="50">value is 50</p>
+        <p *ngSwitchCase="100">value is 100</p>
+      </div>
     </div>
   </div>
 </div>
