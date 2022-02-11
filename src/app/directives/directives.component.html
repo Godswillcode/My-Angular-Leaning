@@ -1,0 +1,69 @@
+<div class="container">
+  <br />
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-primary" (click)="onlyOdd = !onlyOdd">
+        Only show odd numbers
+      </button>
+      <br /><br />
+      <ul class="list-group">
+        <!-- <div *ngIf="onlyOdd">
+          <li
+            class="list-group-item"
+            *ngFor="let odd of oddNumbers"
+            [ngClass]="{ odd: odd % 2 !== 0 }"
+            [ngStyle]="{ background: odd % 2 !== 0 ? 'yellow' : 'transparent' }"
+          >
+            {{ odd }}
+          </li>
+        </div>
+
+        <div *ngIf="!onlyOdd">
+          <li
+            class="list-group-item"
+            *ngFor="let even of evenNumbers"
+            [ngClass]="{ odd: even % 2 !== 0 }"
+            [ngStyle]="{
+              background: even % 2 !== 0 ? 'yellow' : 'transparent'
+            }"
+          >
+            {{ even }}
+          </li>
+        </div>
+         -->
+        <!--== WORK OF * BEHIND THE SCENE ==-->
+        <!-- <ng-template [ngIf]="!onlyOdd">
+          <div>
+            <li
+            class="list-group-item"
+            *ngFor="let even of evenNumbers"
+            [ngClass]="{ odd: even % 2 !== 0 }"
+            [ngStyle]="{
+              background: even % 2 !== 0 ? 'yellow' : 'transparent'
+            }"
+          >
+            {{ even }}
+          </li>
+          </div>
+        </ng-template> -->
+
+        <!--== CUSTOM STRUCTURE OF DIRECTIVE ==-->
+        <div *appUnless="onlyOdd">
+          <li
+            class="list-group-item"
+            *ngFor="let even of evenNumbers"
+            [ngClass]="{ odd: even % 2 !== 0 }"
+            [ngStyle]="{
+              background: even % 2 !== 0 ? 'yellow' : 'transparent'
+            }"
+          >
+            {{ even }}
+          </li>
+        </div>
+
+      </ul>
+      <p appBasicHighLight>Style me with basic directive!</p>
+      <p appBetterHighLight [defaultColor]="'yellow'" [highLightColor]="'red'">Style me with a better directive!</p>
+    </div>
+  </div>
+</div>
