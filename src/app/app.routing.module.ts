@@ -1,6 +1,8 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "./auth.guard.service";
+import { ObsHomeComponent } from "./observables/home/home.component";
+import { ObsUserComponent } from "./observables/user/user.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { HomeComponent } from "./routing/home/home.component";
 import { CanDeactivateGuard } from "./routing/servers/edit-server/can-deactivate-guard.service";
@@ -11,7 +13,8 @@ import { ServersComponent } from "./routing/servers/servers.component";
 import { UserComponent } from "./routing/users/user/user.component";
 import { UsersComponent } from "./routing/users/users.component";
 
-const appRoutes: Routes = [
+// == ROUTING LECTURE
+/* const appRoutes: Routes = [
     { path: '', component: HomeComponent },
     {
       path: 'users',
@@ -20,7 +23,7 @@ const appRoutes: Routes = [
     },
     {
       path: 'servers',
-    //  canActivate: [AuthGuard],
+    //  canActivate: [AuthGuard],//
      canActivateChild: [AuthGuard],
       component: ServersComponent,
       children: [
@@ -30,7 +33,14 @@ const appRoutes: Routes = [
     },
     { path: 'not-found', component: PageNotFoundComponent },
     { path: '**', redirectTo: '/not-found' },
+  ]; */
+
+// == OBSERVABLES LECTURE
+  const appRoutes: Routes = [
+    {path: '', component: ObsHomeComponent},
+    {path: 'user/:id', component: ObsUserComponent}
   ];
+  
 
 @NgModule({
  imports: [

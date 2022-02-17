@@ -30,6 +30,10 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard.service';
 import { CanDeactivateGuard } from './routing/servers/edit-server/can-deactivate-guard.service';
 import { ServerResolver } from './routing/servers/server/server-resolver.service';
+import { ObsHomeComponent } from './observables/home/home.component';
+import { ObsUserComponent } from './observables/user/user.component';
+import { ObservableComponent } from './observables/observables-component';
+import { FormTdComponent } from './form-td/form-td.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +55,10 @@ import { ServerResolver } from './routing/servers/server/server-resolver.service
     EditServerComponent,
     ServerComponent,
     PageNotFoundComponent,
+    ObsHomeComponent,
+    ObsUserComponent,
+    ObservableComponent,
+    FormTdComponent
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule],
   providers: [
