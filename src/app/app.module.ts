@@ -34,6 +34,7 @@ import { ObsHomeComponent } from './observables/home/home.component';
 import { ObsUserComponent } from './observables/user/user.component';
 import { ObservableComponent } from './observables/observables-component';
 import { FormTdComponent } from './form-td/form-td.component';
+import { FormTdAssignComponent } from './form-td-assign/form-td-assign.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { FormTdComponent } from './form-td/form-td.component';
     ObsHomeComponent,
     ObsUserComponent,
     ObservableComponent,
-    FormTdComponent
+    FormTdComponent,
+    FormTdAssignComponent
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule],
   providers: [
