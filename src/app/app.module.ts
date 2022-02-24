@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { BasicHighLightDirective } from './directives/basic-highlight/basic-highlight.directive';
@@ -35,6 +35,13 @@ import { ObsUserComponent } from './observables/user/user.component';
 import { ObservableComponent } from './observables/observables-component';
 import { FormTdComponent } from './form-td/form-td.component';
 import { FormTdAssignComponent } from './form-td-assign/form-td-assign.component';
+import { FormReactiveComponent } from './form-reactive/form-reactive.component';
+import { PipesComponent } from './pipes/pipes.component';
+import { ShortenPipe } from './pipes/shorten.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
+import { ReversePipe } from './pipes/reverse.pipe';
+import { HttpRequestComponent } from './http-request/http-request.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -60,9 +67,15 @@ import { FormTdAssignComponent } from './form-td-assign/form-td-assign.component
     ObsUserComponent,
     ObservableComponent,
     FormTdComponent,
-    FormTdAssignComponent
+    FormTdAssignComponent,
+    FormReactiveComponent,
+    PipesComponent,
+    ShortenPipe,
+    FilterPipe,
+    ReversePipe,
+    HttpRequestComponent
   ],
-  imports: [BrowserModule, FormsModule, AppRoutingModule],
+  imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
   providers: [
     AccountsService,
     LoggingService,
