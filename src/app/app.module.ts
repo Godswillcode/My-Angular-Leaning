@@ -41,7 +41,9 @@ import { ShortenPipe } from './pipes/shorten.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { ReversePipe } from './pipes/reverse.pipe';
 import { HttpRequestComponent } from './http-request/http-request.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptorService } from './http-request/auth-interceptor.service';
+import { LoggingInterceptorService } from './http-request/logging-iterceptor.service';
 
 @NgModule({
   declarations: [
@@ -73,9 +75,15 @@ import { HttpClientModule } from '@angular/common/http';
     ShortenPipe,
     FilterPipe,
     ReversePipe,
-    HttpRequestComponent
+    HttpRequestComponent,
   ],
-  imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
   providers: [
     AccountsService,
     LoggingService,
@@ -84,7 +92,17 @@ import { HttpClientModule } from '@angular/common/http';
     AuthService,
     AuthGuard,
     CanDeactivateGuard,
-    ServerResolver
+    ServerResolver,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoggingInterceptorService,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

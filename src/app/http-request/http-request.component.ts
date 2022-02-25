@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
 import { Post } from './post.model';
+import { PostService } from './posts.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-http-request',
@@ -18,55 +19,54 @@ import { Post } from './post.model';
     `,
   ],
 })
-export class HttpRequestComponent implements OnInit {
+export class HttpRequestComponent implements OnInit, OnDestroy {
   loadedPosts: Post[] = [];
-  isLoading = false
+  isLoading = false;
+  error = null;
+  private errorSub: Subscription;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private postsService: PostService) {}
 
-  ngOnInit(){
-  this.fetchPosts()
+  ngOnInit() {
+    this.errorSub = this.postsService.error.subscribe((errorMessage) => {
+      this.error = errorMessage;
+    });
+
+    this.onFetchPosts();
   }
 
   onCreatePost(postData: Post) {
-    this.http
-      .post(
-        'https://ng-complete-guide-386d4-default-rtdb.firebaseio.com/posts.json',
-        postData
-      )
-      .subscribe((responseData) => {
-        console.log(responseData);
-      });
+    this.postsService.createAndStorePost(postData.title, postData.content);
+    
   }
 
   onFetchPosts() {
-    this.fetchPosts()
+    this.isLoading = true;
+    this.postsService.fetchPosts().subscribe(
+      (posts) => {
+        this.isLoading = false;
+        this.loadedPosts = posts;
+      },
+      (error) => {
+        this.isLoading = false;
+        this.error = error.massage;
+      }
+    );
   }
 
   onClearPosts() {
     // Send Http request
+    this.postsService.deletePosts().subscribe(() => {
+      this.loadedPosts = [];
+    });
   }
 
-  private fetchPosts() {
-    this.isLoading = true;
-    this.http
-      .get<{[key: string]: Post}>(
-        'https://ng-complete-guide-386d4-default-rtdb.firebaseio.com/posts.json'
-      )
-      .pipe(map(responseData => {
-         const postArray: Post[] = []
-         for (const key in responseData) {
-           if(responseData.hasOwnProperty(key)) {
-            postArray.push({...responseData[key], id: key})
-           }
-         
-         }
-         return postArray
-      })
-      )
-      .subscribe((posts) => {
-        this.isLoading = false
-       this.loadedPosts = posts
-      });
+  // set error back to null
+  onHandleError() {
+    this.error = null;
+  }
+
+  ngOnDestroy() {
+    this.errorSub.unsubscribe();
   }
 }
