@@ -44,6 +44,7 @@ import { HttpRequestComponent } from './http-request/http-request.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './http-request/auth-interceptor.service';
 import { LoggingInterceptorService } from './http-request/logging-iterceptor.service';
+import { ElementsComponent } from './elements/elements.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { LoggingInterceptorService } from './http-request/logging-iterceptor.ser
     FilterPipe,
     ReversePipe,
     HttpRequestComponent,
+    ElementsComponent,
   ],
   imports: [
     BrowserModule,
