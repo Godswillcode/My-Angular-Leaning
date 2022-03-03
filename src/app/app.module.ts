@@ -45,6 +45,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './http-request/auth-interceptor.service';
 import { LoggingInterceptorService } from './http-request/logging-iterceptor.service';
 import { ElementsComponent } from './elements/elements.component';
+import { AlertComponent } from './elements/alert.component';
+import { AnimationComponent } from './animation/animation.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +80,8 @@ import { ElementsComponent } from './elements/elements.component';
     ReversePipe,
     HttpRequestComponent,
     ElementsComponent,
+    AlertComponent,
+    AnimationComponent
   ],
   imports: [
     BrowserModule,
